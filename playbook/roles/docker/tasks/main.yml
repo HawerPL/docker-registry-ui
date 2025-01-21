@@ -1,0 +1,39 @@
+---
+- name: Add Docker repo for Debian/Ubuntu
+  apt_repository:
+    repo: "docker"
+    state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+- name: Add Docker repo for CentOS/OracleLinux
+  yum_repository:
+    name: "docker-ce-stable"
+    baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    description: Repository for docker packages
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'OracleLinux'
+- name: Add Docker repo for RHEL
+  yum_repository:
+    name: "docker-ce-stable"
+    baseurl: https://download.docker.com/linux/rhel/$releasever/$basearch/stable
+    enabled: yes
+    gpgcheck: yes
+    description: Repository for docker packages
+  when: ansible_distribution == 'RedHat' 
+- name: Install Docker
+  vars:
+    docker_package: "{{ 'docker.io' if ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' else 'docker-ce'}}"
+  package:                          
+    name: "{{ docker_package }}"
+    state: present                  
+- name: Start Docker service
+  service:                          
+    name: "docker"
+    state: started                  
+    enabled: true                   
+- name: Add user to the Docker group
+  user:                
+    name: ansible               
+    groups: docker
+    append: yes    

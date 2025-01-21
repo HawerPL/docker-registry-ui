@@ -1,0 +1,33 @@
+version: '3'
+services:
+  docker-registry-ui:
+    image: docker-registry-ui:latest
+    build: .
+    environment:
+      - APP_NAME=Docker Registry UI
+      - DEFAULT_LOCALE=pl
+      - DOCKER_REGISTRY_URL_1=https://example.registry.eu
+      - DOCKER_REGISTRY_NAME_1=Registry PRD
+      - DOCKER_REGISTRY_IS_DELETABLE_1=False
+      - DOCKER_REGISTRY_LOGIN_1=exampleUsername
+      - DOCKER_REGISTRY_PASSWORD_1=examplePassword
+      - DOCKER_REGISTRY_URL_2=https://example.registry.eu
+      - DOCKER_REGISTRY_NAME_2=Registry TST
+      - DOCKER_REGISTRY_IS_DELETABLE_2=True
+      - DOCKER_REGISTRY_LOGIN_2=exampleUsername
+      - DOCKER_REGISTRY_PASSWORD_2=examplePassword
+      - ENABLED_LOGO=True
+      - SESSION_TIME=60
+      - SUPER_USER_ENABLED=True
+      - SUPER_USER_LOGIN=exampleUsername
+      - SUPER_USER_PASSWORD=examplePassword
+      - LOG_LEVEL=INFO
+      - ENABLED_AUTH=True
+      - COUNT_TAGS=False
+      - PAGINATION_FOR_REQUEST_CATALOG=1000
+      - PAGINATION_FOR_REQUEST_TAGS_LIST=1000
+      - MINIMAL_REPOSITORY_INFO=True
+    ports:
+      - 5555:8080
+    extra_hosts:
+      - "example.registry.eu:host-gateway"

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{% if session['language'] %}{{ session['language'] }}{% else %}en{% endif %}" class="h-100" {% if session['theme'] == 'light' or not session['theme'] %} data-bs-theme="light" {% else %} data-bs-theme="dark" {% endif %}>
+<head>
+    <meta charset="UTF-8">
+    {% block styles %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/external-css.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+    <title>{{ app_name }}</title>
+    {% endblock %}
+</head>
+<body class="h-100">
+{% if (current_user.is_authenticated and not config['LOGIN_DISABLED']) or (config['LOGIN_DISABLED']) %}
+    {% block navigation %}
+        {% include "navigation.html" %}
+    {% endblock %}
+{% endif %}
+    {% block application %}
+        <div class="container">
+            <div class="pt-3">
+                <h1>{{ _("Welcome") }} {{ session['username'] }}! </h1>
+            </div>
+            <p class="lead pb-5">
+                Docker Registry UI pozwala na swobodne przeglądanie rejestrów Dockera. Aplikacja pozwala filtrować
+                obrazy oraz usuwać tagi z rejestru. Całość oparta jest na <a href ="https://specs.opencontainers.org/">
+                OpenContainers Distribution</a> wykorzystując API
+                <a href="https://distribution.github.io/distribution/">CNCF Distribution</a>.
+            </p>
+            <div class="d-flex">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Docker logo" class="img-fluid rounded mx-auto w-75">
+            </div>
+        </div>
+    {% endblock %}
+    {% include 'alert.html' %}
+   {% block scripts %}
+       <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+       <script src="{{ url_for('static', filename='js/external.js') }}"></script>
+   {% endblock %}
+</body>
+</html>

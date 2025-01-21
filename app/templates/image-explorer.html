@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block application %}
+    <div class="f-flex justify-content-center py-3">
+        <div class="d-flex justify-content-center">
+             <div class="card bg-body-secondary" style="width: 75%;{% if session['theme'] == 'dark' %} --bs-bg-opacity: .5;{% else %} --bs-bg-opacity: .75;{% endif %}">
+                 <div class="card-body">
+                    <h4 class="card-title">{{ _("REPOSITORY") }}: {{ image.name }}</h4>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-2 ">
+                        <h5 class="card-subtitle d-flex align-items-center justify-content-start">
+                            TAG:&nbsp;
+                            <span id="tag-url">{{ registry.url|replace('https://', '') }}/{{ image.name }}:{{ image.tag }}</span>
+                            <svg data-clipboard-target="#tag-url" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" role="button" class="bi bi-copy copy-btn ms-2" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"></path>
+                            </svg>
+                        </h5>
+                        <p class="card-text">
+                            {% if enable_edit_tag %}
+                            <button class="btn btn-dark">
+                                {{ _("Edit tag name") }}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"></path>
+                                </svg>
+                            </button>
+                            {% endif %}
+                        </p>
+                    </div>
+
+
+                    {% if v1Compatibility.docker_version %}
+                    <p class="card-text">
+                        <span class="fw-bold"> {{ _("Docker version") }}: </span>
+                        <span id="docker-version">{{ v1Compatibility.docker_version }}</span>
+                    </p>
+                    {% endif %}
+                    {% if v1Compatibility.author %}
+                     <p class="card-text">
+                        <span class="fw-bold"> {{ _("Author") }}: </span>
+                        <span id="image-author">{{ v1Compatibility.author }}</span>
+                    </p>
+                    {% endif %}
+                    <p class="card-text">
+                        <span class="fw-bold"> {{ _("Created") }}: </span>
+                        <span id="date-created">{{ v1Compatibility.created }}</span>
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold"> OS: </span>
+                        <span id="image-os">{{ v1Compatibility.os }}</span>
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold"> {{ _("Architecture") }}: </span>
+                        <span id="architecture">{{ v1Compatibility.architecture }}</span>
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold"> Docker Content Digest: </span>
+                         <span id="digest">{{ image.config.digest }}</span>
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold"> Cmd: </span>
+                         <span id="cmd">{{ v1Compatibility.config.Cmd }}</span></span>
+                    </p>
+                </div>
+                {% if v1Compatibility.config.ExposedPorts %}
+                <div class="card-body">
+                    <p class="card-text" data-bs-toggle="collapse" href="#collapseExposedPorts" role="button">
+                        <span class="fw-bold"> {{ _("Exposed ports") }}: </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
+                        </svg>
+                    </p>
+                    <ul class="list-group list-group-flush collapse" id="collapseExposedPorts">
+                        {% for ports in v1Compatibility.config.ExposedPorts %}
+                        <li class="list-group-item image-port">{{ ports }}</li>
+                        {% endfor %}
+                     </ul>
+                </div>
+                {% endif %}
+                {% if v1Compatibility.config.Env %}
+                <div class="card-body pt-0">
+                    <p class="card-text" data-bs-toggle="collapse" href="#collapseEnv" role="button">
+                        <span class="fw-bold" > {{ _("Environments") }}: </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
+                        </svg>
+                    </p>
+                    <ul class="list-group list-group-flush collapse" id="collapseEnv">
+                        {% for env in v1Compatibility.config.Env %}
+                        <li class="list-group-item image-env">{{ env }}</li>
+                        {% endfor %}
+                     </ul>
+                </div>
+                {% endif %}
+                {% if v1Compatibility.config.Labels %}
+                <div class="card-body pt-0">
+                    <p class="card-text" data-bs-toggle="collapse" href="#collapseLabels" role="button">
+                        <span class="fw-bold"> {{ _("Labels") }}: </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
+                        </svg>
+                    </p>
+                    <ul class="list-group list-group-flush collapse" id="collapseLabels">
+                        {% for label_key, label_value in v1Compatibility.config.Labels.items() %}
+                        <li class="list-group-item image-label">{{ label_key }}: {{ label_value }}</li>
+                        {% endfor %}
+                     </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0 pb-2 pe-3">
+            {% set encoded_repository = image.name | string | quote_plus %}
+            <a class="nav-link " role="button" href="{{ url_for('registry.repository_explorer', registry_name=registry.name, repository=encoded_repository) }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"></path>
+                </svg>
+            </a>
+    </div>
+
+{% endblock %}

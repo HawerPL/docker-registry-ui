@@ -1,0 +1,19 @@
+---
+- name: Create Docker Compose directory
+  file:
+    path: "{{ docker_compose_directory }}"
+    state: directory
+
+- name: Deploy Docker Compose file from template
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ docker_compose_directory }}/docker-compose.yml"
+
+- name: Run app
+  command: "docker compose -f {{ docker_compose_directory }}/docker-compose.yml up -d"
+  register: compose_result
+  changed_when: "'Starting' in compose_result.stdout"
+
+- name: Print Docker compose output
+  debug:
+    var: compose_result.stdout_lines

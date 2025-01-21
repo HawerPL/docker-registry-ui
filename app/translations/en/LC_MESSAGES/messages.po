@@ -1,0 +1,119 @@
+# pybabel compile -f -d app\translations
+
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid ""
+msgstr "Language: en\n"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Registry"
+msgstr "Registry"
+
+msgid "All registries"
+msgstr "All registries"
+
+msgid "Sign in"
+msgstr "Sign in"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Registries explorer"
+msgstr "Registry explorer"
+
+msgid "Metrics"
+msgstr "Metrics"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Welcome"
+msgstr "Welcome, you are logged as"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Tags count"
+msgstr "Tags count"
+
+msgid "Delete repository"
+msgstr "Delete repository"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Architecture"
+msgstr "Architecture"
+
+msgid "Image ID"
+msgstr "Image ID"
+
+msgid "Compressed size"
+msgstr "Compressed size"
+
+msgid "Copy tag"
+msgstr "Copy tag"
+
+msgid "Delete tag"
+msgstr "Delete tag"
+
+msgid "Author"
+msgstr "Author"
+
+msgid "REPOSITORY"
+msgstr "REPOSITORY"
+
+msgid "Docker version"
+msgstr "Docker version"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Exposed ports"
+msgstr "Exposed ports"
+
+msgid "Environments"
+msgstr "Environments"
+
+msgid "Labels"
+msgstr "Labels"
+
+msgid "Edit tag name"
+msgstr "Edit tag name"
+
+msgid "Show images without tags"
+msgstr "Show images without tags"
+
+msgid "Name of the repository"
+msgstr "Name of the repository"
+
+msgid "Number of available tags in a given repository"
+msgstr "Number of available tags in a given repository"
+
+msgid "Deletion of all image tags in the repository"
+msgstr "Deletion of all image tags in the repository"
+
+msgid "The image tag in the given repository"
+msgstr "The image tag in the given repository"
+
+msgid "Unique identifier for Docker images (SHA256 hash)"
+msgstr "Unique identifier for Docker images (SHA256 hash)"
+
+msgid "The architecture for which the painting was prepared"
+msgstr "The architecture for which the painting was prepared"
+
+msgid "Compressed image size"
+msgstr "Compressed image size"
+
+msgid "Copy the image to the clipboard"
+msgstr "Copy the image to the clipboard"
+
+msgid "Remove the tag from the repository"
+msgstr "Remove the tag from the repository"

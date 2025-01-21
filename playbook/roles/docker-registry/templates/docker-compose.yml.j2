@@ -1,0 +1,48 @@
+version: '3'
+services:
+  docker-registry-ui:
+    image: docker-registry-ui:{{ tag | default('latest') }}
+    restart: unless-stopped
+    environment:
+{% if app_name %}
+      - APP_NAME={{ app_name }}
+{% endif %}
+{% if default_locale %}
+      - DEFAULT_LOCALE={{ default_locale }}
+{% endif %}
+{% for registry in docker_registries %}
+      - DOCKER_REGISTRY_URL_{{ loop.index }}={{ registry.url }}
+      - DOCKER_REGISTRY_NAME_{{ loop.index }}={{ registry.name }}
+      - DOCKER_REGISTRY_IS_DELETABLE_{{ loop.index }}={{ registry.is_deletable }}
+      - DOCKER_REGISTRY_LOGIN_{{ loop.index }}={{ registry.login }}
+      - DOCKER_REGISTRY_PASSWORD_{{ loop.index }}={{ registry.password }}
+{% endfor %}
+{% if enabled_logo %}
+      - ENABLED_LOGO={{ enabled_logo }}
+{% endif %}
+{% if session_time %}
+      - SESSION_TIME={{ session_time }}
+{% endif %}
+{% if super_user_enabled %}
+      - SUPER_USER_ENABLED={{ super_user_enabled }}
+{% endif %}
+{% if super_user_login %}
+      - SUPER_USER_LOGIN={{ super_user_login }}
+{% endif %}
+{% if super_user_password %}
+      - SUPER_USER_PASSWORD={{ super_user_password }}
+{% endif %}
+{% if log_level %}
+      - LOG_LEVEL={{ log_level }}
+{% endif %}
+{% if enabled_auth %}
+      - ENABLED_AUTH={{ enabled_auth }}
+{% endif %}
+    ports:
+      - {{ app_port | default(5555) }}:8080
+{% if extra_hosts %}
+    extra_hosts:
+{% for extra_host in extra_hosts%}
+      - "{{ extra_host.fqdn }}:{{ extra_host.address }}"
+{% endfor %}
+{% endif %}

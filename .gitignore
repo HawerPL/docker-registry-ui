@@ -1,0 +1,6 @@
+venv
+app/logs
+.idea
+playbook/.vscode
+logs
+tests/.pytest_cache

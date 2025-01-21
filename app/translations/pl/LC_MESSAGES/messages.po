@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid ""
+msgstr "Language: pl\n"
+
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Registry"
+msgstr "Rejestr"
+
+msgid "All registries"
+msgstr "Wszystkie rejestry"
+
+msgid "Sign in"
+msgstr "Zaloguj się"
+
+msgid "Registries explorer"
+msgstr "Przeglądarka rejestrów"
+
+msgid "Metrics"
+msgstr "Metryki"
+
+msgid "Settings"
+msgstr "Ustawienia"
+
+msgid "Welcome"
+msgstr "Witaj, jesteś zalogowany jako"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Tags count"
+msgstr "Ilość tagów"
+
+msgid "Delete repository"
+msgstr "Usuń repozytorium"
+
+
+msgid "Tags"
+msgstr "Tagi"
+
+msgid "Architecture"
+msgstr "Architektura"
+
+msgid "Image ID"
+msgstr "ID obrazu"
+
+msgid "Compressed size"
+msgstr "Rozmiar skompresowany"
+
+msgid "Copy tag"
+msgstr "Skopiuj tag"
+
+msgid "Delete tag"
+msgstr "Usuń tag"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "REPOSITORY"
+msgstr "REPOZYTORIUM"
+
+msgid "Docker version"
+msgstr "Wersja Dockera"
+
+msgid "Created"
+msgstr "Data utworzenia"
+
+msgid "Exposed ports"
+msgstr "Wystawione porty"
+
+msgid "Environments"
+msgstr "Zmienne środowiskowe"
+
+msgid "Labels"
+msgstr "Etykiety"
+
+msgid "Edit tag name"
+msgstr "Edytuj nazwę tagu"
+
+msgid "Show images without tags"
+msgstr "Pokaż obrazy bez tagów"
+
+msgid "Name of the repository"
+msgstr "Nazwa repozytorium"
+
+msgid "Number of available tags in a given repository"
+msgstr "Liczba dostępnych tagów w danym repozytorium"
+
+msgid "Deletion of all image tags in the repository"
+msgstr "Usunięcie wszystkich tagów obrazów w repozytorium"
+
+msgid "The image tag in the given repository"
+msgstr "Tag obrazu w danym repozytorium"
+
+msgid "Unique identifier for Docker images (SHA256 hash)"
+msgstr "Unikalny identyfikator dla obrazów Docker (skrót SHA256)"
+
+msgid "The architecture for which the painting was prepared"
+msgstr "Architektura dla jakiej został przygotowany obraz"
+
+msgid "Compressed image size"
+msgstr "Skompresowany rozmiar obrazu"
+
+msgid "Copy the image to the clipboard"
+msgstr "Skopiuj obraz do schowka"
+
+msgid "Remove the tag from the repository"
+msgstr "Usuń znacznik z repozytorium"

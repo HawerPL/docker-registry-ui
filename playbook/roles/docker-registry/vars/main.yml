@@ -1,0 +1,31 @@
+---
+ansible_python_interpreter: /usr/bin/python3
+docker_compose_directory: "/home/hawer/docker"
+app_name: "Docker Registry UI"
+default_locale: "pl"
+docker_registries:
+  - url: "https://registry.hawer.eu"
+    name: "Registry PRD"
+    is_deletable: False
+    login: "admin"
+    password: "registry1"
+  - url: "https://registry2.hawer.eu"
+    name: "Registry TST"
+    is_deletable: True
+    login: "admin"
+    password: "registry2"
+enabled_logo: "True"
+session_time: "60"
+super_user_enabled: True
+super_user_login: "admin"
+super_user_password: "admin"
+log_level: "INFO"
+enabled_auth: True
+
+app_port: 5555
+
+extra_hosts:
+  - fqdn: registry.hawer.eu
+    address: host-gateway
+  - fqdn: registry2.hawer.eu
+    address: host-gateway
